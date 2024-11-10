@@ -1,31 +1,137 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import { Link, router } from 'expo-router'
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { Link } from "expo-router";
+import React from "react";
+import { router, Stack } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { Colors } from "@/constants/Colors";
+import InputField from "@/components/InputField";
+import SocialLoginButton from "@/components/SocialLoginButton";
 
-type Props = {}
+type Props = {};
 
 const SignInScreen = (props: Props) => {
   return (
-    <View style={styles.container}>
-      <Text>SignIn Screen</Text>
-      {/* <Link href={"/(tabs)"} asChild> */}
-        <TouchableOpacity onPress={() => {
-          router.dismissAll();
-          router.push('/(tabs)');
-        }}>
-          <Text>Go to App Home Screen</Text>
-        </TouchableOpacity>
-      {/* </Link> */}
-    </View>
-  )
-}
+    <>
+      <Stack.Screen
+        options={{
+          headerTitle: "Sign In",
+          headerLeft: () => {
+            return (
+              <TouchableOpacity style={styles.x} onPress={() => router.back()}>
+                <Ionicons name="close" size={20} color={Colors.black} />
+              </TouchableOpacity>
+            );
+          },
+        }}
+      />
+      <View style={styles.container}>
+        <View>
+          <Text style={styles.title}>Login to Your Account</Text>
 
-export default SignInScreen
+          <InputField
+            placeholder="Email address"
+            placeholderTextColor={Colors.gray}
+            autoCapitalize="none"
+            keyboardType="email-address"
+          />
+          <InputField
+            placeholder="Password"
+            placeholderTextColor={Colors.gray}
+            autoCapitalize="none"
+            secureTextEntry={true}
+          />
+          <InputField
+            placeholder="Confirm Password"
+            placeholderTextColor={Colors.gray}
+            autoCapitalize="none"
+            secureTextEntry={true}
+          />
+
+          <TouchableOpacity style={styles.btn} onPress={()=>router.push("/(tabs)")}>
+            <Text style={styles.btnTxt}>Log In</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.divider} />
+
+        <SocialLoginButton emailHref={"/signin"} />
+        <Text style={styles.loginTxt}>
+          Don't have an account?{" "}
+          <Link href="/signin" asChild>
+            <TouchableOpacity>
+              <Text style={styles.loginTxtSpan}>Sign Up</Text>
+            </TouchableOpacity>
+          </Link>
+        </Text>
+      </View>
+    </>
+  );
+};
+
+export default SignInScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  title: {
+    color: Colors.black,
+    fontSize: 24,
+    fontWeight: "600",
+    letterSpacing: 1.2,
+    marginBottom: 50,
+    backgroundColor: Colors.background,
+  },
+
+  x: {
+    marginLeft: 10,
+    marginRight: 50,
+    height: 20,
+    width: 30,
+  },
+  btn: {
+    backgroundColor: Colors.primary,
+    paddingVertical: 14,
+    paddingHorizontal: 18,
+    alignSelf: "stretch",
+    borderRadius: 5,
+    alignItems: "center",
+    marginTop: 20,
+    marginBottom: 10,
+    width: 300,
+  },
+  btnTxt: {
+    color: Colors.white,
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  loginTxt: {
+    marginTop: 20,
+    marginBottom: 20,
+    fontSize: 14,
+    color: Colors.black,
+    lineHeight: 24,
+    textAlign: "center",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  loginTxtSpan: {
+    color: Colors.primary,
+    fontWeight: "600",
+  },
+  divider: {
+    borderTopColor: Colors.black,
+    borderTopWidth: 10,
+    marginVertical: 20,
+  },
+});

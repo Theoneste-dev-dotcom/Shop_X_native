@@ -12,7 +12,7 @@ const Header = (props: Props) => {
   const insets = useSafeAreaInsets();
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
-      <Text style={styles.logo}>Logo</Text>
+      <Text style={styles.logo}>SX</Text>
       <Link href={"/explore"}>
         <TouchableOpacity style={styles.seachbar}>
           <Text style={styles.seachTxt}>Search</Text>

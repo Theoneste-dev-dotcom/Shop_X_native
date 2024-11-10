@@ -28,7 +28,7 @@ const ProductItem = ({ item }: Props) => {
             <Ionicons
             name="star"
             size={20}
-            color={"#D4A37"}
+            color={"#D4AA37"}
             />
             <Text style={styles.rating}>
                 4.7

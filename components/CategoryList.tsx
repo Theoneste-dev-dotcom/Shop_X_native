@@ -24,9 +24,9 @@ const CategoryList = ({categories}: Props) => {
       numColumns={2}
      columnWrapperStyle={{justifyContent:'space-between', marginBottom:20}}
       data={categories}
-      keyExtractor={(item)=> item.id.toString()} 
+      keyExtractor={(item)=> item._id.toString()} 
       renderItem={({index, item}) => (
-   <CategoryItem item={item}/>
+     <CategoryItem item={item}/>
   )}
   
       />
@@ -50,13 +50,16 @@ const styles = StyleSheet.create({
         color:Colors.black
       },
       titleWrapper: {
+        width:"100%",
         flexDirection:"row",
         justifyContent:"space-between",
-        marginBottom:10
+        marginBottom:10,
+        alignItems:"center",
+        paddingHorizontal:10
       },
       titleTxt:{
         fontSize:16,
-        fontWeight:"600",
+        fontWeight:"500",
         letterSpacing:0.6,
         color:Colors.black
       },
